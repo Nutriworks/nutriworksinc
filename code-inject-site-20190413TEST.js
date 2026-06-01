@@ -626,18 +626,18 @@ function contentFilter(){
 
       /* Check Display Type: Panel, List, Grid */
       if(chk.indexOf('c-ftr-l') != -1){
-        runContentFilter('list',$(this),aspectRatio.imageAspectRatio);
+        runContentFilter('list',$(this),imageAspectRatio);
       }else if(chk.indexOf('c-ftr-g') != -1){
         /* grid */
-        runContentFilter('grid',$(this),aspectRatio.imageAspectRatio);
+        runContentFilter('grid',$(this),imageAspectRatio);
       }else if(chk.indexOf('c-ftr-p') != -1){
         /* panel */
-        runContentFilter('panel',$(this),aspectRatio.imageAspectRatio);
+        runContentFilter('panel',$(this),imageAspectRatio);
       }else if(chk.indexOf('c-ftr-x') != -1){
         /* TEST */
-        runContentFilter('grid2',$(this),aspectRatio.imageAspectRatio);
+        runContentFilter('grid2',$(this),imageAspectRatio);
       }else{
-        runContentFilter('panel',$(this),aspectRatio.imageAspectRatio);
+        runContentFilter('panel',$(this),imageAspectRatio);
       }
 
       // lightDark 0 DARK, 1 LIGHT
