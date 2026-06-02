@@ -630,7 +630,7 @@ function contentFilter(){
       //}
       // end patch
 
-      //New method to get aspect ratio from changed Squarespace carousel output, sets a default value for future-proofing:
+      //New method to get aspect ratio from changed Squarespace carousel render, sets a default value for future-proofing:
       var imageAspectRatio = $(this).find('.summary-block-wrapper').attr('data-image-aspect-ratio');
       if (!imageAspectRatio) {
         imageAspectRatio = '1.5';
