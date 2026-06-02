@@ -618,10 +618,10 @@ function contentFilter(){
       //var aspectRatio = JSON.parse($('.summary-v2-block.content-filter-summary').attr('data-block-json'));
 	  
 	  var blockJson = $(this).find('.summary-v2-block.content-filter-summary').attr('data-block-json');
-      var imageAspectRatio = 1;
+      var imageAspectRatio = 1.5;
 
       if (blockJson) {
-        imageAspectRatio = JSON.parse(blockJson).imageAspectRatio || 1;
+        imageAspectRatio = JSON.parse(blockJson).imageAspectRatio || 1.5;
       }
 
       /* Check Display Type: Panel, List, Grid */
