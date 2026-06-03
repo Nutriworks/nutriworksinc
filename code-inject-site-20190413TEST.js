@@ -3100,7 +3100,7 @@ function makeSlickCarouselGo() {
   var summaryID;
   var slickImgsToShow = 1;
   
-  $('.summary-item-list').each(function(index) {
+  $('.summary-v2-block').each(function(index) {
     // Check each summary for slick, if, then make slick
     // ID method grabs one at a time 
     summaryID = $(this).attr('id');
@@ -3135,7 +3135,7 @@ function makeSlickCarouselGo() {
     var image_style;
 
     // Get the font size based on what the Summary has been set to in layout: small,medium,large,extralarge
-    summ_fontsize = $('#' + sumID).parents('.sqs-block-content').find('div').attr('class');
+    summ_fontsize = $('#' + sumID + ' .summary-item-list').parents('.sqs-block-content').find('div').attr('class');
     summ_fontsize = summ_fontsize.substring(summ_fontsize.indexOf('summary-block-setting-text-size-')+32);
     summ_fontsize = summ_fontsize.substring(0,summ_fontsize.indexOf(' ')-1);
 
@@ -3324,9 +3324,9 @@ function makeSlickCarouselGo() {
 
     ht += '</div>';
 
-    $('#' + sumID).parents('.sqs-block-content').before(ht);
-    $('#' + sumID).parents('.summary-item-list-container').detach();
-    $('#' + sumID).detach();
+    $('#' + sumID + ' .summary-item-list').parents('.sqs-block-content').before(ht);
+    $('#' + sumID + ' .summary-item-list').parents('.summary-item-list-container').detach();
+    $('#' + sumID + ' .summary-item-list').detach();
 
     $("#" + newSlickID).slick({
       dots: true,
