@@ -1,0 +1,99 @@
+/* 
+  nutriworksinc.com
+  LU: 20200921 | staff bio arrow styles
+                 testimonials background - fix top, bigger
+*/
+.filter-nav .switch {
+  display: none !important;
+}
+.filter-nav ul.cats li.cat {
+  color: #902ee0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.filter-nav ul.cats li.cat.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.summary-items.SQSX-contentFilter .summary-item {
+  background-color: #fff;
+}
+.summary-items.SQSX-contentFilter .summary-excerpt p {
+  color: #000;
+}
+.summary-items.SQSX-contentFilter .summary-metadata-container .summary-metadata-item--cats {
+  color: #000;
+}
+.section-nutritional-performance-blog h2 {
+  text-shadow: none !important;
+}
+.section-staff .arrow:before,
+.section-staff .arrow:after {
+  background-color: #ffffff !important;
+}
+.section-staff .sqs-block-summary-v2 .summary-thumbnail-outer-container a.summary-thumbnail-container.sqs-gallery-image-container {
+  display: flex;
+  justify-content: center;
+}
+.section-staff .sqs-block-summary-v2 .summary-thumbnail-outer-container a.summary-thumbnail-container.sqs-gallery-image-container .summary-thumbnail.img-wrapper.bio {
+  height: 250px;
+  padding-bottom: 0 !important;
+  width: 250px;
+}
+.section-staff .sqs-block-summary-v2 .summary-thumbnail-outer-container a.summary-thumbnail-container.sqs-gallery-image-container .summary-thumbnail.img-wrapper.bio img {
+  max-width: 250px;
+  max-height: 250px;
+}
+/* ~~~~~~~~~~~~~~~ [ general ] ~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~ [ header ] ~~~~~~~~~~~~~~~~~ */
+header.Header:not(.Header--overlay) {
+  background-color: #4d1979 !important;
+}
+/* ~~~~~~~~~~~~~~~ [ stickynav ] ~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~ [ forms ] ~~~~~~~~~~~~~~~~~~~ */
+textarea#textarea-yui_3_17_2_1_1583955776853_48213-field {
+  display: none !important;
+}
+/* ~~~~~~~~~~~~~~~ [ testimonials ] ~~~~~~~~~~~~~~~~ */
+.section-testimonials .excerpt > p {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+/* ~~~~~~~~~~~~~~~ [ Home: Testimonials ] ~~~~~~~~~~~~~~~~~~~ */
+#testimonials-section-copy {
+  background-image: url("https://images.squarespace-cdn.com/content/5deb93423ab4a76a02d47635/1600175965496-TZQF8BR34UMTNHCRL1Q5/Testimonial-logo-back.png?format=750w&content-type=image%2Fpng") !important;
+  background-repeat: no-repeat !important;
+  background-position: 50% 150px !important;
+  background-size: 40% !important;
+}
+/* ~~~~~~~~~~~~~~~ [ FAQ ] ~~~~~~~~~~~~~~~~ */
+.section-faq h2 {
+  color: #fff !important;
+}
+.section-faq ul.makeAccordion.accordion_0.accordionlimit li.accordion_button {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.section-faq ul.makeAccordion.accordion_0.accordionlimit li.accordion_button.active {
+  background-color: #4d1979 !important;
+}
+.section-faq .expandLimitedAccordion {
+  border: 1px solid #fff;
+  border-radius: 25px;
+  display: table;
+  margin: 1rem auto;
+  padding: 0.5rem 2rem;
+}
+.section-faq .expandLimitedAccordion a {
+  border-style: none !important;
+}
+/* ~~~~~~~~~~~~~~~ [ BLOG ] ~~~~~~~~~~~~~~~~ */
+p.ele-cnt-caret {
+  background-color: #fff !important;
+  border-radius: 1rem;
+  color: #4d1979;
+  padding: 1.5rem;
+}
+/* ~~~~~~~~~~~~~~~ [ footer ] ~~~~~~~~~~~~~~~~~~~ */
+footer.Footer {
+  background: radial-gradient(50% 50% at 50% 50%, #500D86 0%, #19042A 100%);
+}
