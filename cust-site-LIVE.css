@@ -97,3 +97,7 @@ p.ele-cnt-caret {
 footer.Footer {
   background: radial-gradient(50% 50% at 50% 50%, #500D86 0%, #19042A 100%);
 }
+/* Hide unused blog tag filters (All / Video) */
+.content-filter-summary .filter-nav ul.tags {
+    display: none !important;
+}
