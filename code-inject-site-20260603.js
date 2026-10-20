@@ -771,7 +771,42 @@ function contentFilter(){
     /* THE ITEMS */
     h += '<div class="summary-items SQSX-contentFilter" data-displaytype="' + displayType + '">';
 
-    $.getJSON(jsonURL, function(data){
+    // JOgle - 20261020: Retrieve every page before rendering the content filter.
+    // Squarespace blog collections typically return 20 items per JSON request.
+    function fetchAllCollectionItems(url, done) {
+      var allItems = [];
+      var visited = {};
+
+      function fetchPage(pageUrl) {
+        if (visited[pageUrl]) {
+          console.error('Content filter: repeated pagination URL', pageUrl);
+          return;
+        }
+        visited[pageUrl] = true;
+
+        $.getJSON(pageUrl, function(pageData) {
+          if (Array.isArray(pageData.items)) {
+            allItems = allItems.concat(pageData.items);
+          }
+
+          var pagination = pageData.pagination;
+          if (pagination && pagination.nextPage && pagination.nextPageUrl) {
+            var nextUrl = pagination.nextPageUrl;
+            nextUrl += (nextUrl.indexOf('?') === -1 ? '?' : '&') + 'format=json';
+            fetchPage(nextUrl);
+          } else {
+            pageData.items = allItems;
+            done(pageData);
+          }
+        }).fail(function(jqXHR, status, error) {
+          console.error('Content filter: failed to load blog posts', pageUrl, status, error);
+        });
+      }
+
+      fetchPage(url);
+    }
+
+    fetchAllCollectionItems(jsonURL, function(data){
 
       var allCatsArray = [];      //  No ALL to start in case we want a featured - ALL added later if not
       var allTagsArray = ["All"]; //  Automatically adding all as the first for tags
