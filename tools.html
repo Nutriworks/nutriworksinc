@@ -1,0 +1,488 @@
+<div class="tools-accordion">
+
+  <!-- Sweat Rate Calculator -->
+  <div class="accordion-item">
+    <button class="accordion-button">Sweat Rate Calculator</button>
+    <div class="accordion-content">
+      <div class="tools-calculator">
+
+        <p class="calculator-blurb">
+          Sweat tests are critical for endurance athletes and individuals who are heavy sweaters. They can also be helpful if you do workouts indoors in a heated environment. Losing too much weight during exercise due to sweat loss will impair your recovery, hinder you from performance gains, and cause muscle cramping. This could also be a reason for headaches and GI distress. Sweat rates vary tremendously from person to person, with the exercise being performed, and during different times of the year due to weather shifts and in different climates.
+        </p>
+        <p class="calculator-blurb">
+          We recommend doing at least two sweat tests for each type of exercise in similar weather conditions to be sure that they match.  If they don't match, you should get a third to be sure at least two of your sweat rate tests match before implementing a hydration plan.
+        </p>
+        <p class="calculator-blurb">
+          You can drink fluids during a sweat test; however, you may not eat. As a matter of fact, we DO NOT recommend exercising for this length of time during hot and humid conditions without fluids.
+        </p>
+        <p class="calculator-blurb">
+          If you will be racing outdoors, your sweat tests should also be done outdoors. Indoor sweat tests do not apply to outdoor racing.
+        </p>
+        <p class="calculator-blurb">
+          Sweat test rules:
+        </p>
+        <ol class="calculator-list">
+          <li>Your planned exercise should be approximately one hour long.</li>
+          <li>Document temperature and humidity if you are exercising outside.</li>
+          <li>Weigh yourself nude prior to the training/exercise session.</li>
+          <li>Document type of training: run, swim, bike, tennis, soccer, etc.</li>
+          <li>Document the exact amount of time you spent training (in minutes). As previously mentioned, we recommend about one hour.</li>
+          <li>Document the exact amount of fluids you consumed.</li>
+          <li>Weigh yourself nude after the training/exercise session.</li>
+          <li>Use the calculator and the inputs you have collected to calculate your individual sweat rate during these conditions.</li>
+        </ol>
+
+        <div class="unit-toggle">
+          <button type="button" id="usBtn" class="active" onclick="setUnits('us')">US</button>
+          <button type="button" id="metricBtn" onclick="setUnits('metric')">Metric</button>
+        </div>
+
+        <form id="sweatForm">
+
+          <label>
+            <span id="preLabel">Pre-exercise weight (lbs)</span>
+            <input type="number" step="0.1" id="preWeight">
+          </label>
+
+          <label>
+            <span id="postLabel">Post-exercise weight (lbs)</span>
+            <input type="number" step="0.1" id="postWeight">
+          </label>
+
+          <label>
+            <span id="fluidLabel">Fluid consumed (fl oz)</span>
+            <input type="number" step="0.1" id="fluidConsumed">
+          </label>
+		  <!--
+          <label>
+            <span id="urineLabel">Urine volume (fl oz)</span>
+            <input type="number" step="0.1" id="urineVolume">
+          </label>
+		  -->
+          <label>
+            Exercise duration (minutes)
+            <input type="number" step="1" id="duration">
+          </label>
+
+          <button type="button" class="calc-button" onclick="calculateSweatRate()">Calculate</button>
+
+          <div id="error" class="error"></div>
+          <div id="result" class="result"></div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- BMR Calculator -->
+  <div class="accordion-item">
+    <button class="accordion-button">BMR Calculator</button>
+    <div class="accordion-content">
+      <div class="tools-calculator">
+
+        <p class="calculator-blurb">
+          Knowing your basal metabolic rate should be the foundation of any nutrition plan. We recommend starting with this amount of calories for any goal: fat loss, performance/wellness or muscle gain. Use this calculator with our corresponding online course to help you understand how many calories you should be consuming each day.
+        </p>
+
+        <div class="unit-toggle">
+          <button type="button" id="bmrUsBtn" class="active" onclick="setBmrUnits('us')">US</button>
+          <button type="button" id="bmrMetricBtn" onclick="setBmrUnits('metric')">Metric</button>
+        </div>
+
+        <form id="bmrForm">
+
+          <label>
+            <span id="bmrWeightLabel">Weight (lbs)</span>
+            <input type="number" step="0.1" id="bmrWeight" required>
+          </label>
+
+          <label>
+            <span id="bmrHeightLabel">Height (inches)</span>
+            <input type="number" step="0.1" id="bmrHeight" required>
+          </label>
+
+          <label>
+            Age (years)
+            <input type="number" step="1" id="bmrAge" required>
+          </label>
+
+          <label>
+            Sex
+            <select id="bmrSex">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </label>
+
+          <label>
+            Body fat % (optional)
+            <input type="number" step="0.1" id="bmrBodyFat">
+          </label>
+
+          <button type="button" class="calc-button" onclick="calculateBMR()">Calculate</button>
+
+          <div id="bmrError" class="error"></div>
+          <div id="bmrResult" class="result"></div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+	
+	<!-- Fat Free Mass Calculator -->
+	<div class="accordion-item">
+	  <button class="accordion-button">Fat Free Mass Calculator</button>
+	  <div class="accordion-content">
+		<div class="tools-calculator">
+
+		  <p class="calculator-blurb">
+			Tracking your fat free mass over time is very important as part of any goal. If you are trying to lose fat, you do not want to lose muscle (which is included in your fat free mass calculation). If you are trying to gain muscle, you want to be able to track if you are only gaining muscle (also included in your fat free mass calculation). If you are focused on performance and wellness, you likely want to remain as lean as your age and genetics will allow. Tracking your fat free mass over time is how you know what changes are happening in the muscle mass department. You will need his calculator as part of our corresponding courses to track over time. <span style="text-decoration: underline;">It’s imperative that you are using the same technique for checking your body fat percentage to track this input.</span>
+		  </p>
+
+		  <div class="unit-toggle">
+			<button type="button" id="fatfreeUsBtn" class="active" onclick="setFatFreeUnits('us')">US</button>
+			<button type="button" id="fatfreeMetricBtn" onclick="setFatFreeUnits('metric')">Metric</button>
+		  </div>
+
+		  <form id="fatFreeMassForm">
+
+			<label>
+			  <span id="fatfreeWeightLabel">Weight (lbs)</span>
+			  <input type="number" step="0.1" id="fatfreeWeight" required>
+			</label>
+
+			<label>
+			  <span id="fatfreeBodyFatLabel">Body fat (%)</span>
+			  <input type="number" step="0.1" id="fatfreeBodyFatPct" required>
+			</label>
+
+			<button type="button" class="calc-button" onclick="calculateFatFreeMass()">Calculate</button>
+
+			<div id="fatfreeError" class="error"></div>
+			<div id="fatfreeResult" class="result"></div>
+
+		  </form>
+		</div>
+	  </div>
+	</div>
+  
+	<!-- Goal Weight Range Calculator -->
+	<div class="accordion-item">
+	  <button class="accordion-button">Goal Weight Range Calculator</button>
+	  <div class="accordion-content">
+		<div class="tools-calculator">
+		  <p class="calculator-blurb">
+		    <span style="font-weight: bold;">The Goal Weight Range calculator is coming soon!</span> This calculator can be used in conjunction with your body fat percentage and the ranges we discuss in our corresponding course that are healthy for your age. This will allow you to lose only fat and gain or maintain muscle for your goal.
+		  </p>
+		  <!--
+		  <p class="calculator-blurb">
+			Use this goal weight range calculator in conjunction with your body fat percentage and the ranges we discuss in our corresponding course that are healthy for your age. This will allow you to lose only fat and gain or maintain muscle for your goal.
+		  </p>
+
+		  <div class="unit-toggle">
+			<button type="button" id="gwUsBtn" class="active" onclick="setGwUnits('us')">US</button>
+			<button type="button" id="gwMetricBtn" onclick="setGwUnits('metric')">Metric</button>
+		  </div>
+
+		  <form id="goalWeightForm">
+
+			<label>
+			  <span id="gwHeightLabel">Height (inches)</span>
+			  <input type="number" step="0.1" id="gwHeight" required>
+			</label>
+
+			<label>
+			  Sex (for context)
+			  <select id="gwSex">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			  </select>
+			</label>
+
+			<button type="button" class="calc-button" onclick="calculateGoalWeight()">Calculate</button>
+
+			<div id="gwError" class="error"></div>
+			<div id="gwResult" class="result"></div>
+			
+		  </form>
+		  -->
+		</div>
+	  </div>
+	</div>
+
+</div>
+
+<style>
+.tools-accordion .accordion-content {
+  display: none; /* collapsed by default */
+  margin-bottom: 1.5em;
+}
+
+.tools-accordion .accordion-button {
+  width: 100%;
+  text-align: left;
+  padding: 1em;
+  background: #4C1976;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 1.0em;
+  border-radius: 6px;
+}
+
+.tools-accordion .accordion-button.active {
+  background: #3a1256;
+}
+</style>
+
+<script>
+let units = 'us';
+let bmrUnits = 'us';
+let gwUnits = 'us';
+let fatfreeUnits = 'us';
+
+/* Accordion behavior */
+const accordionButtons = document.querySelectorAll('.tools-accordion .accordion-button');
+
+accordionButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const openItem = document.querySelector('.tools-accordion .accordion-button.active');
+    
+    // Close previously open accordion
+    if (openItem && openItem !== button) {
+      openItem.classList.remove('active');
+      openItem.nextElementSibling.style.display = 'none';
+    }
+
+    // Toggle current accordion
+    button.classList.toggle('active');
+    const content = button.nextElementSibling;
+    if (button.classList.contains('active')) {
+      content.style.display = 'block';
+    } else {
+      content.style.display = 'none';
+    }
+  });
+});
+
+/* Sweat rate calculation */
+
+function setUnits(u) {
+  units = u;
+
+  document.getElementById('usBtn').classList.toggle('active', u === 'us');
+  document.getElementById('metricBtn').classList.toggle('active', u === 'metric');
+
+  document.getElementById('preLabel').innerText =
+    u === 'us' ? 'Pre-exercise weight (lbs)' : 'Pre-exercise weight (kg)';
+  document.getElementById('postLabel').innerText =
+    u === 'us' ? 'Post-exercise weight (lbs)' : 'Post-exercise weight (kg)';
+  document.getElementById('fluidLabel').innerText =
+    u === 'us' ? 'Fluid consumed (fl oz)' : 'Fluid consumed (ml)';
+//document.getElementById('urineLabel').innerText =
+//  u === 'us' ? 'Urine volume (fl oz)' : 'Urine volume (ml)';
+}
+
+function calculateSweatRate() {
+  const pre = parseFloat(preWeight.value);
+  const post = parseFloat(postWeight.value);
+  const fluid = parseFloat(fluidConsumed.value) || 0;
+//const urine = parseFloat(urineVolume.value) || 0;
+  const minutes = parseFloat(duration.value);
+
+  error.innerText = '';
+  result.innerText = '';
+
+  if (!pre || !post || !minutes || pre <= post || minutes <= 0) {
+    error.innerText = 'Please enter valid weights and duration.';
+    return;
+  }
+
+  let weightLossKg, sweatLossL;
+
+  if (units === 'us') {
+    // US conversions
+    const preKg = pre * 0.453592;
+    const postKg = post * 0.453592;
+    const fluidL = fluid * 0.0295735;
+//  const urineL = urine * 0.0295735;
+
+    weightLossKg = preKg - postKg;
+//  sweatLossL = weightLossKg + fluidL - urineL;
+    sweatLossL = weightLossKg + fluidL;
+  } else {
+    // Metric: ml → liters
+    const fluidL = fluid / 1000;
+//  const urineL = urine / 1000;
+
+    weightLossKg = pre - post;
+//  sweatLossL = weightLossKg + fluidL - urineL;
+    sweatLossL = weightLossKg + fluidL;
+  }
+
+  const hours = minutes / 60;
+  const rateL = sweatLossL / hours;
+  const rateOz = rateL * 33.814;
+
+  result.innerHTML =
+    units === 'us'
+      ? `Estimated sweat rate: <strong>${rateOz.toFixed(1)} fl oz/hour</strong>`
+      : `Estimated sweat rate: <strong>${rateL.toFixed(2)} L/hour</strong>`;
+}
+
+/* BMR calculation */
+
+function setBmrUnits(u) {
+  bmrUnits = u;
+
+  document.getElementById('bmrUsBtn').classList.toggle('active', u === 'us');
+  document.getElementById('bmrMetricBtn').classList.toggle('active', u === 'metric');
+
+  document.getElementById('bmrWeightLabel').innerText =
+    u === 'us' ? 'Weight (lbs)' : 'Weight (kg)';
+  document.getElementById('bmrHeightLabel').innerText =
+    u === 'us' ? 'Height (inches)' : 'Height (cm)';
+}
+
+function calculateBMR() {
+  const weightInput = parseFloat(bmrWeight.value);
+  const heightInput = parseFloat(bmrHeight.value);
+  const age = parseInt(bmrAge.value);
+  const sex = bmrSex.value;
+  const bodyFat = parseFloat(bmrBodyFat.value);
+
+  bmrError.innerText = '';
+  bmrResult.innerText = '';
+
+  if (!weightInput || !heightInput || !age || !sex) {
+    bmrError.innerText = 'Please complete all required fields.';
+    return;
+  }
+
+  // Convert to metric if needed
+  const weightKg = bmrUnits === 'us' ? weightInput * 0.453592 : weightInput;
+  const heightCm = bmrUnits === 'us' ? heightInput * 2.54 : heightInput;
+
+  /* =========================
+     FORMULAS
+     ========================= */
+
+  // Mifflin-St Jeor
+  const mifflin =
+    sex === 'male'
+      ? (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5
+      : (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+
+  // Harris-Benedict (revised)
+  const harris =
+    sex === 'male'
+      ? 88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * age)
+      : 447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * age);
+
+  let values = [mifflin, harris];
+
+  // Katch-McArdle (only if body fat % provided)
+  if (!isNaN(bodyFat) && bodyFat > 0 && bodyFat < 100) {
+    const leanMassKg = weightKg * (1 - bodyFat / 100);
+    const katch = 370 + (21.6 * leanMassKg);
+    values.push(katch);
+  }
+
+  // Average and round
+  const avgBmr = Math.ceil(
+    values.reduce((sum, val) => sum + val, 0) / values.length
+  );
+
+  bmrResult.innerHTML = `
+    Estimated BMR: <strong>${avgBmr} calories/day</strong><br>
+    <!--<small>Based on ${values.length} formula${values.length > 1 ? 's' : ''}</small>-->
+  `;
+}
+
+/* Goal weight range calculation */
+
+function setGwUnits(u) {
+  gwUnits = u;
+  document.getElementById('gwUsBtn').classList.toggle('active', u === 'us');
+  document.getElementById('gwMetricBtn').classList.toggle('active', u === 'metric');
+
+  document.getElementById('gwHeightLabel').innerText =
+    u === 'us' ? 'Height (inches)' : 'Height (cm)';
+}
+
+function calculateGoalWeight() {
+  const height = parseFloat(document.getElementById('gwHeight').value);
+
+  gwError.innerText = '';
+  gwResult.innerText = '';
+
+  if (!height || height <= 0) {
+    gwError.innerText = 'Please enter a valid height.';
+    return;
+  }
+
+  let heightM;
+  if (gwUnits === 'us') {
+    heightM = height * 0.0254; // inches → meters
+  } else {
+    heightM = height / 100; // cm → meters
+  }
+
+  // BMI healthy range: 18.5 – 24.9
+  const minBMI = 18.5;
+  const maxBMI = 24.9;
+
+  let minWeight = minBMI * (heightM ** 2);
+  let maxWeight = maxBMI * (heightM ** 2);
+
+  if (gwUnits === 'us') {
+    minWeight *= 2.20462; // kg → lbs
+    maxWeight *= 2.20462;
+    gwResult.innerHTML = `Healthy weight range: <strong>${minWeight.toFixed(0)} – ${maxWeight.toFixed(0)} lbs</strong>`;
+  } else {
+    gwResult.innerHTML = `Healthy weight range: <strong>${minWeight.toFixed(1)} – ${maxWeight.toFixed(1)} kg</strong>`;
+  }
+}
+
+/* Fat Free Mass calculation */
+
+function setFatFreeUnits(u) {
+  fatfreeUnits = u;
+  document.getElementById('fatfreeUsBtn').classList.toggle('active', u === 'us');
+  document.getElementById('fatfreeMetricBtn').classList.toggle('active', u === 'metric');
+
+  document.getElementById('fatfreeWeightLabel').innerText =
+    u === 'us' ? 'Weight (lbs)' : 'Weight (kg)';
+}
+
+function calculateFatFreeMass() {
+  const weightInput = parseFloat(document.getElementById('fatfreeWeight').value);
+  const bodyFatInput = parseFloat(document.getElementById('fatfreeBodyFatPct').value);
+
+  fatfreeError.innerText = '';
+  fatfreeResult.innerText = '';
+
+  if (!weightInput || weightInput <= 0) {
+    fatfreeError.innerText = 'Please enter a valid weight.';
+    return;
+  }
+
+  if (!bodyFatInput || bodyFatInput <= 0) {
+    fatfreeError.innerText = 'Please enter a valid body fat %.';
+    return;
+  }
+
+  let weightKg = fatfreeUnits === 'us' ? weightInput * 0.453592 : weightInput;
+  
+  //calculation: weight - (weight x body fat% decimal)
+  const fatFreeMass = weightInput - (weightInput * (bodyFatInput / 100));
+
+  fatfreeResult.innerHTML =
+    fatfreeUnits === 'us'
+      ? `Fat free mass: <strong>${fatFreeMass.toFixed(1)} lbs</strong>`
+      : `Fat free mass: <strong>${fatFreeMass.toFixed(1)} kg</strong>`;
+
+}
+</script>
