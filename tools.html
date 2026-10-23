@@ -1,4 +1,66 @@
 <div class="tools-accordion">
+	
+<!-- Body Fat Percentage Calculator -->
+<div class="accordion-item">
+  <button type="button" class="accordion-button">
+    Body Fat Percentage Calculator
+  </button>
+
+  <div class="accordion-content">
+    <div class="tools-calculator">
+
+      <p class="calculator-blurb">
+        Tracking body composition can help you monitor changes in fitness and training over time.
+      </p>
+
+      <div class="unit-toggle">
+        <button type="button" id="bfUsBtn" class="active"
+          onclick="setBodyFatUnits('us')">US</button>
+        <button type="button" id="bfMetricBtn"
+          onclick="setBodyFatUnits('metric')">Metric</button>
+      </div>
+
+      <form id="bodyFatForm" onsubmit="event.preventDefault(); calculateBodyFat();">
+
+        <label>
+          Sex
+          <select id="bfSex" onchange="toggleBodyFatHip()">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+
+        <label>
+          <span id="bfHeightLabel">Height (inches)</span>
+          <input type="number" step="0.1" id="bfHeight">
+        </label>
+
+        <label>
+          <span id="bfNeckLabel">Neck circumference (inches)</span>
+          <input type="number" step="0.1" id="bfNeck">
+        </label>
+
+        <label>
+          <span id="bfWaistLabel">Waist circumference (inches)</span>
+          <input type="number" step="0.1" id="bfWaist">
+        </label>
+
+        <label id="bfHipField" style="display:none;">
+          <span id="bfHipLabel">Hip circumference (inches)</span>
+          <input type="number" step="0.1" id="bfHip">
+        </label>
+
+        <button type="submit" class="calc-button">
+          Calculate
+        </button>
+
+        <div id="bfError" class="error" role="alert"></div>
+        <div id="bfResult" class="result" aria-live="polite"></div>
+
+      </form>
+    </div>
+  </div>
+</div>
 
   <!-- Sweat Rate Calculator -->
   <div class="accordion-item">
@@ -266,6 +328,138 @@ accordionButtons.forEach(button => {
     }
   });
 });
+
+	
+/* =========================
+   BODY FAT PERCENTAGE CALCULATOR
+   ========================= */
+
+let bfUnits = 'us';
+
+function setBodyFatUnits(u) {
+  if (u !== 'us' && u !== 'metric') return;
+  if (u === bfUnits) return;
+
+  const toMetric = u === 'metric';
+  const factor = toMetric ? 2.54 : 1 / 2.54;
+
+  // Convert existing entries to the selected units.
+  ['bfHeight', 'bfNeck', 'bfWaist', 'bfHip'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input.value.trim() !== '') {
+      const value = Number(input.value);
+      if (Number.isFinite(value)) {
+        input.value = (value * factor).toFixed(2);
+      }
+    }
+  });
+
+  bfUnits = u;
+
+  document.getElementById('bfUsBtn')
+    .classList.toggle('active', u === 'us');
+  document.getElementById('bfMetricBtn')
+    .classList.toggle('active', u === 'metric');
+
+  const unit = u === 'us' ? 'inches' : 'cm';
+
+  document.getElementById('bfHeightLabel').textContent =
+    `Height (${unit})`;
+  document.getElementById('bfNeckLabel').textContent =
+    `Neck circumference (${unit})`;
+  document.getElementById('bfWaistLabel').textContent =
+    `Waist circumference (${unit})`;
+  document.getElementById('bfHipLabel').textContent =
+    `Hip circumference (${unit})`;
+
+  document.getElementById('bfResult').textContent = '';
+  document.getElementById('bfError').textContent = '';
+}
+
+function toggleBodyFatHip() {
+  const isFemale =
+    document.getElementById('bfSex').value === 'female';
+
+  document.getElementById('bfHipField').style.display =
+    isFemale ? '' : 'none';
+
+  document.getElementById('bfResult').textContent = '';
+  document.getElementById('bfError').textContent = '';
+}
+
+function calculateBodyFat() {
+  const sex = document.getElementById('bfSex').value;
+  const height = Number(document.getElementById('bfHeight').value);
+  const neck = Number(document.getElementById('bfNeck').value);
+  const waist = Number(document.getElementById('bfWaist').value);
+  const hip = Number(document.getElementById('bfHip').value);
+
+  const errorEl = document.getElementById('bfError');
+  const resultEl = document.getElementById('bfResult');
+
+  errorEl.textContent = '';
+  resultEl.textContent = '';
+
+  const required = ['bfHeight', 'bfNeck', 'bfWaist'];
+  if (sex === 'female') required.push('bfHip');
+
+  if (required.some(id => {
+    const el = document.getElementById(id);
+    return el.value.trim() === '' ||
+      !Number.isFinite(Number(el.value)) ||
+      Number(el.value) <= 0;
+  })) {
+    errorEl.textContent =
+      'Please enter valid positive measurements in all required fields.';
+    return;
+  }
+
+  // All Navy formula measurements use centimeters.
+  const factor = bfUnits === 'us' ? 2.54 : 1;
+  const heightCm = height * factor;
+  const neckCm = neck * factor;
+  const waistCm = waist * factor;
+  const hipCm = hip * factor;
+
+  let density;
+
+  if (sex === 'male') {
+    if (waistCm <= neckCm) {
+      errorEl.textContent =
+        'Waist circumference must be greater than neck circumference.';
+      return;
+    }
+
+    density =
+      -0.191 * Math.log10(waistCm - neckCm) +
+       0.155 * Math.log10(heightCm) +
+       1.032;
+
+  } else {
+    if (waistCm + hipCm <= neckCm) {
+      errorEl.textContent =
+        'Please check your circumference measurements.';
+      return;
+    }
+
+    density =
+      -0.350 * Math.log10(waistCm + hipCm - neckCm) +
+       0.221 * Math.log10(heightCm) +
+       1.296;
+  }
+
+  const bodyFatPercent = 100 * ((4.95 / density) - 4.5);
+
+  if (!Number.isFinite(bodyFatPercent) ||
+      bodyFatPercent < 0 || bodyFatPercent > 100) {
+    errorEl.textContent =
+      'These measurements produced an invalid estimate. Please check your entries.';
+    return;
+  }
+
+  resultEl.innerHTML =
+    `Estimated body fat: <strong>${bodyFatPercent.toFixed(1)}%</strong>`;
+}
 
 /* Sweat rate calculation */
 
