@@ -32,22 +32,22 @@
 
         <label>
           <span id="bfHeightLabel">Height (inches)</span>
-          <input type="number" step="0.1" id="bfHeight">
+          <input type="number" step="0.1" id="bfHeight" oninput="limitDecimals(this, 1)">
         </label>
 
         <label>
           <span id="bfNeckLabel">Neck circumference (inches)</span>
-          <input type="number" step="0.01" id="bfNeck">
+          <input type="number" step="0.01" id="bfNeck" oninput="limitDecimals(this, 2)">
         </label>
 
         <label>
           <span id="bfWaistLabel">Waist circumference (inches)</span>
-          <input type="number" step="0.01" id="bfWaist">
+          <input type="number" step="0.01" id="bfWaist" oninput="limitDecimals(this, 2)">
         </label>
 
         <label id="bfHipField" style="display:none;">
           <span id="bfHipLabel">Hip circumference (inches)</span>
-          <input type="number" step="0.01" id="bfHip">
+          <input type="number" step="0.01" id="bfHip" oninput="limitDecimals(this, 2)">
         </label>
 
         <button type="submit" class="calc-button">
@@ -329,6 +329,18 @@ accordionButtons.forEach(button => {
   });
 });
 
+function limitDecimals(input, maxDecimals) {
+  const value = input.value;
+
+  if (value.includes('.')) {
+    const parts = value.split('.');
+
+    if (parts[1].length > maxDecimals) {
+      input.value = parts[0] + '.' +
+        parts[1].substring(0, maxDecimals);
+    }
+  }
+}
 	
 /* =========================
    BODY FAT PERCENTAGE CALCULATOR
