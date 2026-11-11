@@ -480,47 +480,57 @@ function setUnits(u) {
 }
 
 function calculateSweatRate() {
-  const pre = parseFloat(preWeight.value);
-  const post = parseFloat(postWeight.value);
-  const fluid = parseFloat(fluidConsumed.value) || 0;
-//const urine = parseFloat(urineVolume.value) || 0;
-  const minutes = parseFloat(duration.value);
+  const pre = parseFloat(document.getElementById('preWeight').value);
+  const post = parseFloat(document.getElementById('postWeight').value);
+  const fluidInput = document.getElementById('fluidConsumed').value;
+  const fluid = fluidInput.trim() === '' ? 0 : Number(fluidInput);
+  const minutes = parseFloat(document.getElementById('duration').value);
 
-  error.innerText = '';
-  result.innerText = '';
+  const errorEl = document.getElementById('error');
+  const resultEl = document.getElementById('result');
 
-  if (!pre || !post || !minutes || pre <= post || minutes <= 0) {
-    error.innerText = 'Please enter valid weights and duration.';
+  errorEl.innerText = '';
+  resultEl.innerText = '';
+
+  // Validate inputs
+  if (!Number.isFinite(pre) || pre <= 0 ||
+      !Number.isFinite(post) || post <= 0 ||
+      !Number.isFinite(fluid) || fluid < 0 ||
+      !Number.isFinite(minutes) || minutes <= 0) {
+    errorEl.innerText =
+      'Please enter valid weights, fluid intake, and duration.';
     return;
   }
 
   let weightLossKg, sweatLossL;
 
   if (units === 'us') {
-    // US conversions
-    const preKg = pre * 0.453592;
-    const postKg = post * 0.453592;
-    const fluidL = fluid * 0.0295735;
-//  const urineL = urine * 0.0295735;
+    const preKg = pre * 0.45359237;
+    const postKg = post * 0.45359237;
+    const fluidL = fluid * 0.0295735296;
 
     weightLossKg = preKg - postKg;
-//  sweatLossL = weightLossKg + fluidL - urineL;
     sweatLossL = weightLossKg + fluidL;
   } else {
-    // Metric: ml → liters
     const fluidL = fluid / 1000;
-//  const urineL = urine / 1000;
 
     weightLossKg = pre - post;
-//  sweatLossL = weightLossKg + fluidL - urineL;
     sweatLossL = weightLossKg + fluidL;
+  }
+
+  // Negative sweat loss indicates inconsistent inputs
+  // or fluid balance not captured by this simplified method.
+  if (sweatLossL < 0) {
+    errorEl.innerText =
+      'Calculated sweat loss is negative. Please check your weights and fluid intake.';
+    return;
   }
 
   const hours = minutes / 60;
   const rateL = sweatLossL / hours;
-  const rateOz = rateL * 33.814;
+  const rateOz = rateL * 33.8140227;
 
-  result.innerHTML =
+  resultEl.innerHTML =
     units === 'us'
       ? `Estimated sweat rate: <strong>${rateOz.toFixed(1)} fl oz/hour</strong>`
       : `Estimated sweat rate: <strong>${rateL.toFixed(2)} L/hour</strong>`;
